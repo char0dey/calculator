@@ -5,9 +5,8 @@
 package com.char0dey.calculator.data
 
 enum class CalculationState {
-
     INITIAL,
-    LEFT_PART_DONE,
-    DONE
-
+    LEFT_PART_PRESENT,
+    OPERATION_PRESENT,
+    RIGHT_PART_PRESENT,
 }
