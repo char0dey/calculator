@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="CalcButton" parent="Widget.AppCompat.Button">
         <item name="android:layout_margin">4dp</item>
         <item name="backgroundTint">@color/purple_700</item>
