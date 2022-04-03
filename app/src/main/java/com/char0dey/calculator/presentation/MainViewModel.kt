@@ -49,4 +49,8 @@ class MainViewModel(
     fun clear() {
         interactor.clear().map(communication, errorCommunication)
     }
+
+    fun operation(operation: String) {
+        interactor.operation(operation).map(communication, errorCommunication)
+    }
 }

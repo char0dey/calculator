@@ -1,9 +1,11 @@
 package com.char0dey.calculator.domain
 
+import com.char0dey.calculator.data.CalculationOperation
 import com.char0dey.calculator.data.CalculationState.*
 import com.char0dey.calculator.data.MainRepository
 import com.char0dey.calculator.data.Operation
 import com.char0dey.calculator.presentation.Communication
+import java.util.*
 
 /**
  * @author char0dey 30.03.2022
@@ -24,6 +26,8 @@ interface MainInteractor {
     fun handle(value: String): Result
 
     fun clear(): Result
+
+    fun operation(operation: String): Result
 
     class Base(private val repository: MainRepository) : MainInteractor {
 
@@ -109,6 +113,17 @@ interface MainInteractor {
             } else {
                 repository.updateRightPart(new, false)
                 Result.Success(repository.leftPart() + repository.operation() + repository.rightPart())
+            }
+        }
+
+        override fun operation(operation: String): Result {
+            return when (CalculationOperation.valueOf(operation.uppercase(Locale.getDefault()))) {
+                CalculationOperation.PLUS -> plus()
+                CalculationOperation.MINUS -> minus()
+                CalculationOperation.DIVIDE -> divide()
+                CalculationOperation.MULTIPLY -> multiply()
+                CalculationOperation.CLEAR -> clear()
+                CalculationOperation.CALCULATE -> calculate()
             }
         }
 

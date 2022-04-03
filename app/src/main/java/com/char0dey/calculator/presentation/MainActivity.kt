@@ -5,6 +5,7 @@ package com.char0dey.calculator.presentation
  */
 
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.char0dey.calculator.data.MainRepository
 import com.char0dey.calculator.data.Part
@@ -38,70 +39,37 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(binding.textView, it, Snackbar.LENGTH_SHORT).show()
         }
 
-        binding.button0.setOnClickListener {
-            viewModel.handle(binding.button0.text.toString())
-        }
-
-        binding.button1.setOnClickListener {
-            viewModel.handle(binding.button1.text.toString())
-        }
-
-        binding.button2.setOnClickListener {
-            viewModel.handle(binding.button2.text.toString())
-        }
-
-        binding.button3.setOnClickListener {
-            viewModel.handle(binding.button3.text.toString())
-        }
-
-        binding.button4.setOnClickListener {
-            viewModel.handle(binding.button4.text.toString())
-        }
-
-        binding.button5.setOnClickListener {
-            viewModel.handle(binding.button5.text.toString())
-        }
-
-        binding.button6.setOnClickListener {
-            viewModel.handle(binding.button6.text.toString())
-        }
-
-        binding.button7.setOnClickListener {
-            viewModel.handle(binding.button7.text.toString())
-        }
-
-        binding.button8.setOnClickListener {
-            viewModel.handle(binding.button8.text.toString())
-        }
-
-        binding.button9.setOnClickListener {
-            viewModel.handle(binding.button9.text.toString())
-        }
-
-        //
-        binding.plusButton.setOnClickListener {
-            viewModel.plus()
-        }
-
-        binding.minusButton.setOnClickListener {
-            viewModel.minus()
-        }
-
-        binding.multiplyButton.setOnClickListener {
-            viewModel.multiply()
-        }
-
-        binding.divideButton.setOnClickListener {
-            viewModel.divide()
-        }
-
-        binding.resultButton.setOnClickListener {
-            viewModel.calculate()
-        }
-
-        binding.clearButton.setOnClickListener {
-            viewModel.clear()
-        }
-
+        setListeners(binding)
     }
+
+    private fun setListeners(binding: ActivityMainBinding) {
+        with(binding) {
+            button0.setKeyboardListener()
+            button1.setKeyboardListener()
+            button2.setKeyboardListener()
+            button3.setKeyboardListener()
+            button4.setKeyboardListener()
+            button5.setKeyboardListener()
+            button6.setKeyboardListener()
+            button7.setKeyboardListener()
+            button8.setKeyboardListener()
+            button9.setKeyboardListener()
+
+            plusButton.setKeyboardOperationListener()
+            minusButton.setKeyboardOperationListener()
+            multiplyButton.setKeyboardOperationListener()
+            divideButton.setKeyboardOperationListener()
+            resultButton.setKeyboardOperationListener()
+            clearButton.setKeyboardOperationListener()
+        }
+    }
+
+    private fun Button.setKeyboardListener() = setOnClickListener {
+        viewModel.handle(text.toString())
+    }
+
+    private fun Button.setKeyboardOperationListener() = setOnClickListener {
+        viewModel.operation(tag.toString())
+    }
+
 }
